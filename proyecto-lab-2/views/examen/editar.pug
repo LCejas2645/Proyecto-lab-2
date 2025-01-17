@@ -1,0 +1,20 @@
+extends ../layout
+
+block content
+  .container.mt-5
+    h2 Editar Examen
+    form(action=`/examenes/${examenDetalle.id}/editar` method="post" )
+      .form-group
+        label(for="descripcion") Descripción
+        input#descripcion.form-control(type="text" name="descripcion" value=`${examenDetalle.descripcion}` required)
+
+      .form-group
+        label(for="tiempoPromedio") Tiempo Promedio (minutos)
+        input#tiempoPromedio.form-control(type="number" name="tiempoPromedio" value=`${examenDetalle.tiempoPromedio}` required)
+
+      .form-group
+        label(for="activo") Activo
+        input#activo(type="checkbox" name="activo" checked=`${examenDetalle.activo}`)
+
+      button.btn.btn-primary(type="submit") Guardar Cambios
+    a.btn.btn-secondary(href="/examenes") Volver

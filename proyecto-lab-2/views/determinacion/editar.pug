@@ -1,0 +1,28 @@
+extends ../layout
+
+block content
+  .container.mt-5
+    h2 Editar Determinación
+    form(action=`/examenes/${examenId}/determinaciones/${determinacion.id}/editar` method="post")
+      .form-group
+        label(for="descripcion") Descripción
+        input#descripcion.form-control(type="text" name="descripcion" value=`${determinacion.descripcion}` required)
+
+      .form-group
+        label(for="unidadMedida") Unidad de Medida
+        input#unidadMedida.form-control(type="text" name="unidadMedida" value=`${determinacion.unidadMedida}` required)
+
+      .form-group
+        label(for="valorMin") Valor Mínimo
+        input#valorMin.form-control(type="number" name="valorMin" value=`${determinacion.valorMin}` required)
+
+      .form-group
+        label(for="valorMax") Valor Máximo
+        input#valorMax.form-control(type="number" name="valorMax" value=`${determinacion.valorMax}` required)
+
+      .form-group
+        label(for="activo") Activo
+        input#activo(type="checkbox" name="activo" checked=determinacion.activo)
+
+      button.btn.btn-primary(type="submit") Guardar Cambios
+    a.btn.btn-secondary(href=`/examenes/${examenId}`) Volver

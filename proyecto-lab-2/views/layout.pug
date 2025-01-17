@@ -1,0 +1,57 @@
+doctype html
+html
+  head
+    title Home Page
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css')
+    link(rel='stylesheet', href='https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css')
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css')
+    style.
+      .flex-space-between {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+  body
+    nav.navbar.navbar-expand-lg.navbar-custom
+      a.navbar-brand(href='#') Home
+      button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNav', aria-controls='navbarNav', aria-expanded='false', aria-label='Toggle navigation')
+        span.navbar-toggler-icon
+      .collapse.navbar-collapse#navbarNav
+        ul.navbar-nav
+          li.nav-item.active
+            a.nav-link(href='#') Home
+              span.sr-only (current)
+          li.nav-item
+            a.nav-link(href='/pacientes') Pacientes
+          li.nav-item
+            a.nav-link(href='/examenes') Eamenes
+    .container
+      block content 
+    script(src='https://code.jquery.com/jquery-3.5.1.slim.min.js')
+    script(src='https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js')
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js')
+    script(src='https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js')
+    script(src='https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js')
+    script.
+      $(document).ready(function() {
+        $('#example').DataTable({
+          language: {
+            lengthMenu: "Mostrar _MENU_ registros por página",
+            zeroRecords: "No se encontraron resultados",
+            info: "Mostrando página _PAGE_ de _PAGES_",
+            infoEmpty: "No hay registros disponibles",
+            infoFiltered: "(filtrado de _MAX_ registros en total)",
+            search: "Buscar:",
+            paginate: {
+              first: "Primero",
+              last: "Último",
+              next: "Siguiente",
+              previous: "Anterior"
+            }
+        }
+      });
+      });

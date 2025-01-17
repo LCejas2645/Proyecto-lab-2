@@ -1,0 +1,52 @@
+extends ../layout
+
+block content
+  if mensaje
+    .alert.alert-success#mensajeTemporal
+      | #{mensaje}
+
+  .mensaje-temporal.hide#mensajeTemporal
+      | Paciente agregado con exito!
+  .container
+    h1 Lista de pacientes
+    div.container
+      a.btn.btn-success(href="/pacientes/agregar") Agregar nuevo paciente 
+    hr
+    table#example.table.table-striped.table-bordered
+      thead
+        tr
+          th Nombre
+          th Edad
+          th Email
+          th Dni
+          th Sexo 
+          th Embarazo
+          th Patologia preexistente
+          th 
+      tbody
+        if pacientes !== null
+          each paciente in pacientes
+            tr
+              td= paciente.nombreCompleto
+              td= paciente.edad
+              td= paciente.mail
+              td= paciente.dni
+              td= paciente.sexo 
+              td= paciente.embarazo ? "Si" : "No"
+              td= paciente.patologiaPre 
+              td.flex-space-between  
+                a.btn.btn-primary(href=`/pacientes/actualizar/${paciente.id}`) editar    
+                form(action=`/pacientes/eliminar` method="post" style="display:inline" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este paciente?');")
+                  input(type="hidden" name="id" value=paciente.id)
+                  button.btn.btn-danger(type="submit") eliminar  
+  script.
+    document.addEventListener('DOMContentLoaded', function() {
+      const divMensajeTemporal = document.getElementById('mensajeTemporal');
+      if (divMensajeTemporal) {
+        // Ocultar el mensaje después de 3 segundos (3000 milisegundos)
+        setTimeout(function() {
+          divMensajeTemporal.style.display = 'none';
+        }, 3000); // Cambia el valor de 3000 según la duración deseada en milisegundos
+      }
+    });
+        

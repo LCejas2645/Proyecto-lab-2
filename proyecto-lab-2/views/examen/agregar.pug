@@ -1,0 +1,20 @@
+extends ../layout
+
+block content
+  .container.mt-5
+    h2 Agregar Nuevo Examen
+    form(action="/examenes/agregar" method="post")
+      .form-group
+        label(for="descripcion") Descripción
+        input#descripcion.form-control(type="text" name="descripcion" required)
+
+      .form-group
+        label(for="tiempoPromedio") Tiempo Promedio (minutos)
+        input#tiempoPromedio.form-control(type="number" name="tiempoPromedio" required)
+
+      .form-group
+        label(for="activo") Activo
+        input#activo(type="checkbox" name="activo")
+
+      button.btn.btn-primary(type="submit") Agregar Examen
+    a.btn.btn-secondary(href="/examenes") Volver

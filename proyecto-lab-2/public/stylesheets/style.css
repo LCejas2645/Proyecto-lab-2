@@ -1,0 +1,37 @@
+*{margin: 0;padding: 0;}
+*,*::before,*::after{box-sizing: border-box;}
+body{min-height: 100dvh;}
+input,button,textarea,select{font:inherit;}
+p{text-wrap: pretty;}
+h1,h2,h3,h4,h5,h6{text-wrap: balance;}
+img,video,svg{height: auto;max-width: 100%;}
+
+
+.navbar-custom{
+  background-color: #009688; /* Cambia esto al color que prefieras */
+}
+
+.navbar-custom .navbar-brand {
+  color: white; /* Color de la marca de la barra de navegación */
+}
+
+.navbar-custom .nav-link {
+  color: white; /* Color de los enlaces de navegación */
+}
+
+.mensaje-temporal {
+  background-color: #92ff77;
+  color: #424242;
+  border: 1px solid #92ff77;
+  padding: 10px;
+  margin-bottom: 20px;
+  transition: opacity 0.5s ease;
+}
+
+.mensaje-temporal.hide {
+  opacity: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}

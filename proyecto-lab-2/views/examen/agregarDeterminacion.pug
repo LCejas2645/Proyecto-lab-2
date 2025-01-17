@@ -1,0 +1,73 @@
+extends ../layout
+
+block content
+  .container.mt-5
+    h2 Agregar Determinaciones para #{examenN.descripcion}
+    form(action=`/examenes/${examenN.id}/determinaciones/agregar` method="post")
+      .form-group
+        label(for="descripcion") Descripción
+        input#descripcion.form-control(type="text" name="descripcion" required)
+
+      .form-group
+        label(for="unidadMedida") Unidad de Medida
+        input#unidadMedida.form-control(type="text" name="unidadMedida" required)
+
+      .form-group
+        label(for="valorMin") Valor Mínimo
+        input#valorMin.form-control(type="number" name="valorMin" required)
+
+      .form-group
+        label(for="valorMax") Valor Máximo
+        input#valorMax.form-control(type="number" name="valorMax" required)
+
+      .form-group
+        label(for="activo") Activo
+        input#activo(type="checkbox" name="activo")
+
+      .form-group
+        h4 Valores de Referencia
+        .reference-values-container
+          .reference-value
+            .form-group
+              label(for="valoresReferencia[0][categoria]") Categoría
+              input.form-control(type="text" name="valoresReferencia[0][categoria]" required)
+            
+            .form-group
+              label(for="valoresReferencia[0][valorMin]") Valor Mínimo
+              input.form-control(type="number" name="valoresReferencia[0][valorMin]" required)
+            
+            .form-group
+              label(for="valoresReferencia[0][valorMax]") Valor Máximo
+              input.form-control(type="number" name="valoresReferencia[0][valorMax]" required)
+            
+            button(type="button" class="btn btn-danger remove-reference-value") Quitar Valor de Referencia
+
+          button(type="button" class="btn btn-secondary add-reference-value") Agregar Valor de Referencia
+
+      button.btn.btn-primary(type="submit") Agregar Determinación
+    a.btn.btn-secondary(href="/examenes") Volver
+
+  script.
+    document.addEventListener('DOMContentLoaded', () => {
+      let referenceValueIndex = 1;
+
+      document.querySelector('.add-reference-value').addEventListener('click', () => {
+        const referenceValueContainer = document.querySelector('.reference-values-container');
+        const newReferenceValue = referenceValueContainer.querySelector('.reference-value').cloneNode(true);
+        newReferenceValue.querySelectorAll('input').forEach(input => {
+          input.name = input.name.replace(/\d+/, referenceValueIndex);
+          input.value = '';
+        });
+        newReferenceValue.querySelector('.remove-reference-value').addEventListener('click', (e) => {
+          e.target.closest('.reference-value').remove();
+        });
+        referenceValueContainer.appendChild(newReferenceValue);
+        referenceValueIndex++;
+      });
+
+      document.querySelectorAll('.remove-reference-value').forEach(button => {
+        button.addEventListener('click', (e) => {
+          e.target.closest('.reference-value').remove();
+        });
+      });
+    });

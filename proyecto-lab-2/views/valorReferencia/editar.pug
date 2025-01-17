@@ -1,0 +1,20 @@
+extends ../layout
+
+block content
+  .container.mt-5
+    h2 Editar Valor de Referencia
+    form(action=`/examenes/${examenId}/determinaciones/${determinacionId}/valoresReferencia/${valorReferencia.id}/editar` method="post")
+      .form-group
+        label(for="categoria") Categoría
+        input#categoria.form-control(type="text" name="categoria" value=`${valorReferencia.categoria}` required)
+
+      .form-group
+        label(for="valorMin") Valor Mínimo
+        input#valorMin.form-control(type="number" name="valorMin" value=`${valorReferencia.valorMin}` required)
+
+      .form-group
+        label(for="valorMax") Valor Máximo
+        input#valorMax.form-control(type="number" name="valorMax" value=`${valorReferencia.valorMax}` required)
+
+      button.btn.btn-primary(type="submit") Guardar Cambios
+    a.btn.btn-secondary(href=`/examenes/${examenId}/determinaciones/${determinacionId}`) Volver

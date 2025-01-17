@@ -1,0 +1,34 @@
+extends ../layout
+
+block content
+  .container.mt-5
+    .row.justify-content-center
+      .col-md-6
+        h2.mb-4 #{isEdit ? 'Actualizar' : 'Agregar'} Paciente
+        form(action= isEdit ?  `/pacientes/actualizar/${pacienteA.id}` : "/pacientes/agregar" , method="post")
+          .form-group
+            label(for="nombreCompleto") Nombre
+            input.form-control(name="nombreCompleto" id="nombreCompleto" type="text" pattern="[A-Za-z\s]+" value= isEdit ? pacienteA.nombreCompleto : '' required)
+          .form-group
+            label(for="dni" ) DNI
+            input.form-control( name="dni" id="dni"  value= isEdit ? pacienteA.dni : '' required)
+          .form-group
+            label(for="sexo") Sexo 
+            select.form-control(id="sexo" name="sexo")
+              option(value="Masculino" selected=isEdit && pacienteA.sexo === 'Masculino') Masculino
+              option(value="Femenino" selected=isEdit && pacienteA.sexo === 'Femenino') Femenino
+              option(value="Otro" selected=isEdit && pacienteA.sexo === 'Otro') Otro
+          .form-group
+            label(for="edad") Edad
+            input.form-control(name="edad" id="edad" type="number" minlength="0" maxlength="150" value= isEdit ? pacienteA.edad : '' required)
+          .form-group
+            label(for="mail") Email
+            input.form-control(name="mail" id="mail" type="email" value= isEdit ? pacienteA.mail : '' required)
+          .form-group.form-check
+            input.form-check-input(type="checkbox" name="embarazo" id="embarazo" checked=isEdit && pacienteA.embarazo)
+            label.form-check-label(for="embarazo") Embarazo
+          .form-group
+            label(for="patologiaPre") Patología Preexistente
+            input.form-control(name="patologiaPre" id="patologiaPre" type="text" value= isEdit ? pacienteA.patologiaPre : '')
+          .text-center
+            button.btn.btn-primary(type="submit") #{isEdit ? 'Actualizar' : 'Agregar'} Paciente

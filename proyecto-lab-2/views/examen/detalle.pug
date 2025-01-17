@@ -1,0 +1,53 @@
+extends ../layout
+
+block content
+  .container.mt-2
+    .row.justify-content-center
+      .col-md-8
+        .card.shadow.mb-4
+          .card-body
+            h3.text-center.mb-3 Exámen
+            .row
+              .col-md-6
+                p.mb-2
+                  strong Descripción: 
+                  | #{examenDetalle.descripcion}
+                a.btn.btn-warning.ml-2(href=`/examenes/${examenDetalle.id}/editar`) Editar Examen
+              .col-md-3
+                p.mb-2
+                  strong Tiempo Promedio: 
+                  | #{examenDetalle.tiempoPromedio} minutos
+              .col-md-3
+                p.mb-2
+                  strong Activo: 
+                  | #{examenDetalle.activo ? 'Sí' : 'No'}
+
+    .row.justify-content-center
+      .col-md-8
+        .card.shadow.mb-4
+          .card-body
+            h3.text-center.mb-3 Determinaciones
+            .accordion(id="accordionExample")
+              each determinacion, index in examenDetalle.determinaciones
+                .card
+                  .card-header(id=`heading${index}`)
+                    h4.mb-0
+                      button.btn.btn-link.collapsed(type="button", data-toggle="collapse", data-target=`#collapse${index}`, aria-expanded="false", aria-controls=`collapse${index}`)
+                        | #{determinacion.descripcion} (#{determinacion.unidadMedida})
+                  .collapse(id=`collapse${index}`, aria-labelledby=`heading${index}`, data-parent="#accordionExample")
+                    .card-body
+                      p
+                        strong Valor Mínimo: 
+                        | #{determinacion.valorMin}
+                      p
+                        strong Valor Máximo: 
+                        | #{determinacion.valorMax}
+                      a.btn.btn-warning.ml-2(href=`/examenes/${examenDetalle.id}/determinaciones/${determinacion.id}/editar`) Editar Determinación
+                      h5.mt-3 Valores de Referencia
+                      ul.list-group
+                        each valor in determinacion.valoresReferencia
+                          li.list-group-item
+                            | #{valor.categoria}: #{valor.valorMin} - #{valor.valorMax}
+                            a.btn.btn-warning.ml-2(href=`/examenes/${examenDetalle.id}/determinaciones/${determinacion.id}/valoresReferencia/${valor.id}/editar`) Editar Valor de Referencia
+    .text-center.mt-4
+      a.btn.btn-secondary(href="/examenes") Volver

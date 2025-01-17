@@ -1,0 +1,44 @@
+extends ../layout
+
+block content
+  if mensaje
+    .alert.alert-success#mensajeTemporal
+      | #{mensaje}
+
+  .mensaje-temporal.hide#mensajeTemporal
+    | Exámen agregado con éxito!
+  
+  .container
+    h1 Lista de Exámenes
+    div.container
+      a.btn.btn-success(href="/examenes/agregar") Agregar nuevo Exámen 
+    hr
+    table#example.table.table-striped.table-bordered
+      thead
+        tr
+          th ID
+          th Descripcion
+          th Estado
+          th Acciones
+      tbody
+        if examenes !== null
+          each examen in examenes
+            tr
+              td= examen.id
+              td= examen.descripcion
+              td= examen.activo ? 'Activo' : 'Inactivo'
+              td.flex-space-between  
+                a.btn.btn-primary(href=`/examenes/${examen.id}`) Ver
+                a.btn.btn-warning(href=`/examenes/${examen.id}/editar`) Editar    
+                form(action=`/examenes/${examen.id}/desactivar` method="post" style="display:inline" onsubmit="return confirm('¿Estás seguro de que deseas desactivar este examen?');")
+                  button.btn.btn-danger(type="submit") Desactivar
+  script.
+    document.addEventListener('DOMContentLoaded', function() {
+      const divMensajeTemporal = document.getElementById('mensajeTemporal');
+      if (divMensajeTemporal) {
+        // Ocultar el mensaje después de 3 segundos (3000 milisegundos)
+        setTimeout(function() {
+          divMensajeTemporal.style.display = 'none';
+        }, 3000); // Cambia el valor de 3000 según la duración deseada en milisegundos
+      }
+    });
